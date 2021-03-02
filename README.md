@@ -6,7 +6,7 @@
 | --------------  | ------ | ----------- |
 | nickname        | string | null: false |
 | email           | string | null: false, unique: true |
-| encrypted_password       | string | null: false |
+| encrypted_password|string| null: false |
 | last_name       | string | null: false |
 | first_name      | string | null: false |
 | last_name_kana  | string | null: false |
@@ -27,19 +27,19 @@
 | product_description | text   | null: false |
 | category_id         | integer| null: false |
 | users_id            | integer| foreign_key: true |
-| ship_city           | string | null: false |
-| ship_date           | date   | null: false |
-| ship_charge         | integer| null: false |
-| product_status      | string | null: false |
+| ship_city_id        | integer| null: false |
+| ship_date_id        | integer| null: false |
+| ship_charge_id      | integer| null: false |
+| product_status_id   | integer| null: false |
 
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_one ：buyer
 
 
-## buyer テーブル
+## buyers テーブル
 
 | Column         | Type    | Options     |
 | ---------------| ------  | ----------- |
@@ -49,20 +49,20 @@
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - belongs_to :product
 - has_one :address
 
-## address テーブル
+## addresses テーブル
 
 | Column           | Type    | Options     |
 | ---------------  | ------  | ----------- |
 | postal_code      | string  | null: false |
 | ship_region      | string  | null: false |
 | ship_address     | string  | null: false |
-| ship_to_address  | integer | null: false |
+| ship_city_id     | integer | null: false |
 | building         | string  |             |
-| phone            | integer | null: false |
+| phone            | string  | null: false |
 | buyer_id         | integer | foreign_key: true |
 
 ### Association
