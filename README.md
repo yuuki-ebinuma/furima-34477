@@ -26,11 +26,13 @@
 | product_name        | string | null: false |
 | product_description | text   | null: false |
 | category_id         | integer| null: false |
-| users_id            | integer| foreign_key: true |
+| user_id             | integer| foreign_key: true |
 | ship_city_id        | integer| null: false |
 | ship_date_id        | integer| null: false |
 | ship_charge_id      | integer| null: false |
 | product_status_id   | integer| null: false |
+| amount_sold         | integer| null: false |
+
 
 
 ### Association
@@ -43,8 +45,8 @@
 
 | Column         | Type    | Options     |
 | ---------------| ------  | ----------- |
-| users_id       | integer | foreign_key: true |
-| products_id    | integer | foreign_key: true |
+| user_id       | integer | foreign_key: true |
+| product_id    | integer | foreign_key: true |
 
 
 ### Association
