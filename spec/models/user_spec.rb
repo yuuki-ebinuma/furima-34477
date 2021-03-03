@@ -67,15 +67,30 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name is invalid")
     end
+    it "ユーザーの名前は全角でないと登録できない" do
+      @user.first_name = "ｱｲｳｴｵ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
     it "ユーザーの名字のフリガナが空だと登録できない" do
       @user.last_name_kana = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana can't be blank")
     end
-    it "ユーザーの名前のフリガナが空だと登録できない" do
-      @user.first_name_kana = ""
+    it "ユーザーの名字のフリガナは全角でないと登録できない" do
+      @user.last_name_kana = "ｱｲｳｴｵ"
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana can't be blank")
+    end
+    it "ユーザーの名前のフリガナは全角でないと登録できない" do
+      @user.first_name = "ｱｲｳｴｵ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+    it "ユーザーの名前のフリガナが空だと登録できない" do
+      @user.first_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("first name kana can't be blank")
     end
     it "生年月日が空だと登録できない" do
       @user.birthday = ""
