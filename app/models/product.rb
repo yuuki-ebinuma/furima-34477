@@ -13,16 +13,24 @@ class Product < ApplicationRecord
   with_options presence:true do
     validates :product_name
     validates :product_description
-    validates :category
+    validates :category_id
     validates :product_status_id
     validates :ship_charge_id
     validates :ship_city_id
     validates :ship_date_id
-
-  end
-
-  with_options presence:true,format: {with: /^[0-9]+$/} do
+    validates :image
     validates :amount_sold
   end
+  with_options numericality: { other_than: 0 } do
+    validates :category_id
+    validates :product_status_id
+    validates :ship_charge_id
+    validates :ship_city_id
+    validates :ship_date_id
+  end
+
+    validates :amount_sold, numericality: { with: /\A[0-9]+\z/, message: 'Invalid value'}
+
+    validates :amount_sold, numericality: { greater_than_or_equal_to: 300 ,less_than_or_equal_to: 9999999}
 
 end
