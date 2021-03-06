@@ -55,6 +55,15 @@ RSpec.describe Product, type: :model do
       @product.valid?
       expect(@product.errors.full_messages).to include("Amount sold is not a number")
     end
-
+    it "販売価格が¥300以下だと登録できない" do
+      @product.amount_sold = "200"
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Amount sold must be greater than or equal to 300")
+    end
+    it "販売価格が¥9999999以上だと登録できない" do
+      @product.amount_sold = "10000000"
+      @product.valid?
+      expect(@product.errors.full_messages).to include("Amount sold must be less than or equal to 9999999")
+    end
   end
 end
