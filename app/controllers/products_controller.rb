@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!,only: [:new,:delete,:create]
 
   def index
+    @products = Product.all.order(updated_at: :desc)
   end
 
   def new
