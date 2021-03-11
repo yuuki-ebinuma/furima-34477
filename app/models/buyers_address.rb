@@ -1,6 +1,6 @@
 class BuyersAddress
   include ActiveModel::Model
-  attr_accessor :user_id,:product_id,:postal_code,:ship_region,:ship_address,:ship_city_id,:building,:phone,:buyer_id
+  attr_accessor :user_id,:product_id,:postal_code,:ship_region,:ship_address,:ship_city_id,:building,:phone,:buyer_id,:token
   
 
   with_options presence: true do
@@ -9,6 +9,7 @@ class BuyersAddress
     validates :ship_address
     validates :ship_city_id 
     validates :phone, format: {with:/\A\d{11}\z/}
+    validates :token
   end
 
   def save

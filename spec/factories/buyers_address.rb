@@ -5,5 +5,6 @@ FactoryBot.define do
     ship_address         { "福岡市中央区"}
     ship_city_id         { "青山1-1-1" }
     phone                { "08039808767" }
+    token                { "tok_abcdefghijk00000000000000000"}
   end
 end

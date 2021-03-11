@@ -53,7 +53,14 @@ RSpec.describe BuyersAddress, type: :model do
         @buyers_address.valid?
         expect(@buyers_address.errors.full_messages).to include("Phone is invalid")
       end
+    end
 
+    context "クレジット決済情報" do
+      it "クレジット決済情報が空だと登録できない" do
+        @buyers_address.token = ""
+        @buyers_address.valid?
+        expect(@buyers_address.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end

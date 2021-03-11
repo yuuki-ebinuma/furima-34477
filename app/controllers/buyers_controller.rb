@@ -10,6 +10,7 @@ class BuyersController < ApplicationController
   def create
     @buyers_address = BuyersAddress.new(buyers_params)
     if @buyers_address.valid?
+      pay_item
       @buyers_address.save
       redirect_to root_path
     else
@@ -21,7 +22,7 @@ class BuyersController < ApplicationController
   private
 
   def buyers_params
-    params.require(:buyers_address).permit(:postal_code,:ship_region,:ship_address,:ship_city_id,:building,:phone,:product_id).merge(user_id: current_user.id,product_id: @product.id)
+    params.require(:buyers_address).permit(:postal_code,:ship_region,:ship_address,:ship_city_id,:building,:phone).merge(user_id: current_user.id,product_id: @product.id,token: params[:token])
   end
 
   def set_product
@@ -33,7 +34,14 @@ class BuyersController < ApplicationController
     if current_user.id == @product.user_id || @product.buyer.present?
       redirect_to root_path
     end
-
-
   end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: @product.amount_sold,
+        card: buyers_params[:token],
+        currency: 'jpy'
+      )
+    end
 end
