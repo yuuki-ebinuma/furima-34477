@@ -8,11 +8,16 @@ RSpec.describe BuyersAddress, type: :model do
       @product.user.email = 'email@com'
       @product.save
       @buyers_address = FactoryBot.build(:buyers_address,user_id:@user.id,product_id:@product.id)
-      sleep 0.1
+      sleep 0.2
     end
 
     context '購入者情報が登録できるとき' do
       it "全ての項目を入力できれば登録できること" do
+        expect(@buyers_address).to be_valid
+      end
+
+      it "建物番号は空でも登録できる" do
+        @buyers_address.building = ""
         expect(@buyers_address).to be_valid
       end
     end
@@ -53,6 +58,31 @@ RSpec.describe BuyersAddress, type: :model do
         @buyers_address.valid?
         expect(@buyers_address.errors.full_messages).to include("Phone is invalid")
       end
+
+      it "都道府県の0を選択すると登録できない" do
+        @buyers_address.ship_region = 0
+        @buyers_address.valid?
+        expect(@buyers_address.errors.full_messages).to include("Ship region must be other than 0")
+      end
+
+      it "電話番号は英数混合では登録できない" do
+        @buyers_address.phone = "aaa398087671"
+        @buyers_address.valid?
+        expect(@buyers_address.errors.full_messages).to include("Phone is invalid")
+      end
+
+      it "user_idが空では登録できない" do
+        @buyers_address.user_id = ""
+        @buyers_address.valid?
+        expect(@buyers_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "product_idが空では登録できない" do
+        @buyers_address.product_id = ""
+        @buyers_address.valid?
+        expect(@buyers_address.errors.full_messages).to include("Product can't be blank")
+      end
+
     end
 
     context "クレジット決済情報" do

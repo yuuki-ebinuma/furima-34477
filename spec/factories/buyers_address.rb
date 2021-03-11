@@ -6,5 +6,8 @@ FactoryBot.define do
     ship_city_id         { "青山1-1-1" }
     phone                { "08039808767" }
     token                { "tok_abcdefghijk00000000000000000"}
+    building             { "aiueoマンション 101"}
+    user_id              { 1 }
+    product_id           { 1 }
   end
 end

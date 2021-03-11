@@ -10,7 +10,11 @@ class BuyersAddress
     validates :ship_city_id 
     validates :phone, format: {with:/\A\d{11}\z/}
     validates :token
+    validates :user_id
+    validates :product_id
   end
+
+  validates :ship_region , numericality: { other_than: 0 }
 
   def save
     buyer = Buyer.create(user_id: user_id,product_id: product_id)
