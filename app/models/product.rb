@@ -10,6 +10,11 @@ class Product < ApplicationRecord
   has_one :buyer
   has_one_attached :image
 
+  # @tweet.user.id
+  # @tweet.user_id
+
+  # product.buyer.
+
   with_options presence:true do
     validates :product_name
     validates :product_description
