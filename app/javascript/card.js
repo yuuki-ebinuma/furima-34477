@@ -13,7 +13,6 @@ const pay = () => {
       cvc: formData.get("buyers_address[cvc]"),
     };
     Payjp.createToken(card,(status,response)=> {
-      console.log(response)
       if (status == 200 ){
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
