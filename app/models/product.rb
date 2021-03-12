@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   has_one :buyer
   has_one_attached :image
 
+
   with_options presence:true do
     validates :product_name
     validates :product_description
